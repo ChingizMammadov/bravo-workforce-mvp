@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.env*
+!.env.example
+.DS_Store
+*.log
+.vscode
+.idea
+
+# Local Claude Code config (machine-specific, not for the public repo)
+.claude/settings.local.json

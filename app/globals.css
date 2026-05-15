@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* Theme tokens as RGB channel triplets so Tailwind's `<alpha-value>` works
+   (text-fg/60, bg-fg/10, bg-bg-card/70, bg-accent-teal/15 all flip cleanly). */
+:root {
+  /* surfaces */
+  --bg: 239 241 247;
+  --bg-soft: 248 249 252;
+  --bg-card: 255 255 255;
+  --bg-border: 218 222 233;
+  --fg: 17 18 27;
+
+  /* emphasis text — deep enough to read on white */
+  --brand-200: 74 36 230;
+  --brand-300: 91 50 255;
+  --accent-pink: 211 47 116;
+  --accent-blue: 26 122 209;
+  --accent-teal: 13 148 113;
+  --accent-amber: 176 109 8;
+  --accent-red: 211 53 53;
+
+  /* soft, layered light shadows (not the heavy dark drop) */
+  --shadow-soft: 0 1px 2px rgba(16, 24, 40, 0.04),
+    0 10px 28px -10px rgba(16, 24, 40, 0.14);
+  --shadow-glow: 0 0 0 1px rgba(111, 77, 255, 0.12),
+    0 14px 34px -14px rgba(111, 77, 255, 0.34);
+
+  --grad-soft: linear-gradient(135deg, #efecff 0%, #fdeef5 100%);
+  --grid-fade: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgba(111, 77, 255, 0.1),
+    transparent
+  );
+
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 10 10 15;
+  --bg-soft: 15 16 24;
+  --bg-card: 17 19 28;
+  --bg-border: 31 34 48;
+  --fg: 255 255 255;
+
+  --brand-200: 212 204 255;
+  --brand-300: 179 164 255;
+  --accent-pink: 255 95 162;
+  --accent-blue: 95 184 255;
+  --accent-teal: 95 240 200;
+  --accent-amber: 255 179 95;
+  --accent-red: 255 107 107;
+
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 40px -10px rgba(143, 117, 255, 0.45);
+
+  --grad-soft: linear-gradient(
+    135deg,
+    rgba(111, 77, 255, 0.18) 0%,
+    rgba(255, 95, 162, 0.12) 100%
+  );
+  --grid-fade: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgba(143, 117, 255, 0.25),
+    transparent
+  );
+
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--fg));
+  -webkit-font-smoothing: antialiased;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Subtle grain for that premium SaaS feel */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgb(var(--fg) / 0.022) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--fg) / 0.14);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--fg) / 0.24);
+}
+
+.recharts-cartesian-axis-tick text {
+  fill: rgb(var(--fg) / 0.5);
+  font-size: 11px;
+}
+
+.recharts-cartesian-grid line {
+  stroke: rgb(var(--fg) / 0.09);
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: rgb(var(--bg-card) / 0.97) !important;
+  border: 1px solid rgb(var(--fg) / 0.12) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+}
+.recharts-tooltip-wrapper .recharts-tooltip-label,
+.recharts-tooltip-wrapper .recharts-tooltip-item {
+  color: rgb(var(--fg) / 0.85) !important;
+}
