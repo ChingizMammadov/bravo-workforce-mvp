@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Chatbot } from "@/components/chatbot";
 
 export const metadata: Metadata = {
-  title: "Bravo AI — Workforce Intelligence Platform",
+  title: "Bravo Opsis — Workforce Intelligence Platform",
   description:
     "AI-powered retail workforce optimization, FIFO compliance, and waste-reduction intelligence for Bravo Supermarkets.",
 };

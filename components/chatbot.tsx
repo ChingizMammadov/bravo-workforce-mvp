@@ -28,7 +28,7 @@ export function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: "Hello! I'm Bravo Ops, your operational intelligence assistant. How can I help you optimize your store today?",
+      text: "Hello! I'm Bravo Opsis, your operational intelligence assistant. How can I help you optimize your store today?",
       sender: "bot",
       timestamp: new Date()
     }
@@ -96,7 +96,7 @@ export function Chatbot() {
                   <Bot size={20} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-sm leading-tight">Bravo Ops</h3>
+                  <h3 className="font-bold text-sm leading-tight">Bravo Opsis</h3>
                   <p className="text-[10px] opacity-80 uppercase tracking-wider font-medium">Operational Intelligence</p>
                 </div>
               </div>
@@ -145,7 +145,7 @@ export function Chatbot() {
               <input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask Bravo Ops a question..."
+                placeholder="Ask Bravo Opsis a question..."
                 className="flex-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <button

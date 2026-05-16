@@ -74,7 +74,7 @@ export default function LandingPage() {
             <Sparkles size={18} className="text-white" />
           </div>
           <div>
-            <p className="text-sm font-semibold leading-tight">Bravo AI</p>
+            <p className="text-sm font-semibold leading-tight">Bravo Opsis</p>
             <p className="text-[10px] uppercase tracking-wider text-fg/50">
               Workforce Intelligence
             </p>
@@ -107,7 +107,7 @@ export default function LandingPage() {
             </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-fg/60 lg:text-lg">
-            Bravo AI predicts spoilage risk, generates adaptive department KPIs,
+            Bravo Opsis predicts spoilage risk, generates adaptive department KPIs,
             enforces FIFO compliance, and benchmarks workforce performance across
             every branch — cutting operational waste at the source.
           </p>
@@ -201,7 +201,7 @@ export default function LandingPage() {
       </section>
 
       <footer className="relative z-10 border-t border-bg-border/60 py-6 text-center text-xs text-fg/40">
-        Bravo AI Workforce Intelligence — Hackathon MVP · Simulated operational
+        Bravo Opsis Workforce Intelligence — Hackathon MVP · Simulated operational
         intelligence layer
       </footer>
     </div>

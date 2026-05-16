@@ -58,12 +58,10 @@ export function MobileNav() {
                   className="flex items-center gap-2"
                   onClick={() => setOpen(false)}
                 >
-                  <div className="grid h-9 w-9 place-items-center rounded-xl bg-grad-brand shadow-glow">
-                    <Sparkles size={18} className="text-white" />
-                  </div>
+                  <img src="/logo.png" alt="Bravo Opsis" className="h-9 w-9 rounded-xl object-cover" />
                   <div>
                     <p className="text-sm font-semibold leading-tight text-fg">
-                      Bravo AI
+                      Bravo Opsis
                     </p>
                     <p className="text-[10px] uppercase tracking-wider text-fg/50">
                       Workforce Intelligence

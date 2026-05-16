@@ -32,7 +32,7 @@ export function Topbar({ title, subtitle, action }: { title: string; subtitle?: 
               BR
             </div>
             <div className="text-xs leading-tight">
-              <p className="text-fg font-medium">Bravo Ops</p>
+              <p className="text-fg font-medium">Bravo Opsis</p>
               <p className="text-fg/50">Regional Manager</p>
             </div>
 

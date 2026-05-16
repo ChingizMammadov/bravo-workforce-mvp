@@ -11,11 +11,9 @@ export function Sidebar() {
   return (
     <aside className="hidden lg:flex w-64 shrink-0 flex-col border-r border-bg-border/60 bg-bg-soft/60 backdrop-blur-xl">
       <Link href="/" className="flex items-center gap-2 px-6 py-5 border-b border-bg-border/60">
-        <div className="h-9 w-9 rounded-xl bg-grad-brand grid place-items-center shadow-glow">
-          <Sparkles size={18} className="text-white" />
-        </div>
+        <img src="/logo.png" alt="Bravo Opsis" className="h-9 w-9 rounded-xl object-cover" />
         <div>
-          <p className="text-sm font-semibold text-fg leading-tight">Bravo AI</p>
+          <p className="text-sm font-semibold text-fg leading-tight">Bravo Opsis</p>
           <p className="text-[10px] uppercase tracking-wider text-fg/50">Workforce Intelligence</p>
         </div>
       </Link>
