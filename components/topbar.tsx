@@ -28,12 +28,13 @@ export function Topbar({ title, subtitle }: { title: string; subtitle?: string }
           </button>
           <div className="flex items-center gap-2 rounded-xl border border-bg-border/80 bg-bg-card/60 pl-2 pr-3 py-1.5">
             <div className="h-7 w-7 rounded-lg bg-grad-brand grid place-items-center text-[11px] font-semibold text-white">
-              AZ
+              BR
             </div>
             <div className="text-xs leading-tight">
-              <p className="text-fg font-medium">Azin Ops</p>
+              <p className="text-fg font-medium">Bravo Ops</p>
               <p className="text-fg/50">Regional Manager</p>
             </div>
+
             <ChevronDown size={14} className="text-fg/40" />
           </div>
         </div>
