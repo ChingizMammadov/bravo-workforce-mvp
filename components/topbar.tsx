@@ -4,7 +4,7 @@ import { Bell, Search, ChevronDown } from "lucide-react";
 import { MobileNav } from "./mobile-nav";
 import { ThemeToggle } from "./theme-toggle";
 
-export function Topbar({ title, subtitle }: { title: string; subtitle?: string }) {
+export function Topbar({ title, subtitle, action }: { title: string; subtitle?: string; action?: React.ReactNode }) {
   return (
     <header className="sticky top-0 z-30 border-b border-bg-border/60 bg-bg/70 backdrop-blur-xl">
       <div className="flex items-center gap-4 px-6 lg:px-8 py-4">
@@ -14,6 +14,7 @@ export function Topbar({ title, subtitle }: { title: string; subtitle?: string }
           {subtitle && <p className="text-xs text-fg/55 mt-0.5 truncate">{subtitle}</p>}
         </div>
         <div className="ml-auto flex items-center gap-3">
+          {action}
           <div className="hidden md:flex items-center gap-2 rounded-xl border border-bg-border/80 bg-bg-card/60 px-3 py-2 w-64">
             <Search size={14} className="text-fg/50" />
             <input

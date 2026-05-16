@@ -7,6 +7,7 @@ import {
   AlertTriangle,
   TrendingDown,
   ArrowRight,
+  Download,
 } from "lucide-react";
 import Link from "next/link";
 import { PageShell } from "@/components/page-shell";
@@ -41,6 +42,16 @@ export default function DashboardPage() {
     <PageShell
       title="Executive Waste Intelligence"
       subtitle="Enterprise-wide operational visibility across all branches"
+      action={
+        <a
+          href="/bravo-report.pdf"
+          download="Bravo-AI-Executive-Report-May2026.pdf"
+          className="inline-flex items-center gap-2 rounded-xl bg-brand-200 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-brand-300 transition-colors"
+        >
+          <Download size={15} />
+          Download Report
+        </a>
+      }
     >
       <SectionHeader
         eyebrow="Live overview"

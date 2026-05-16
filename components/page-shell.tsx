@@ -7,10 +7,12 @@ import { Topbar } from "./topbar";
 export function PageShell({
   title,
   subtitle,
+  action,
   children,
 }: {
   title: string;
   subtitle?: string;
+  action?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
@@ -18,7 +20,7 @@ export function PageShell({
       <div className="pointer-events-none absolute inset-x-0 -top-40 h-[40rem] bg-grid-fade" />
       <Sidebar />
       <div className="flex-1 min-w-0 relative">
-        <Topbar title={title} subtitle={subtitle} />
+        <Topbar title={title} subtitle={subtitle} action={action} />
         <motion.main
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
