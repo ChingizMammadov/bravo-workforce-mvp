@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Chatbot } from "@/components/chatbot";
 
 export const metadata: Metadata = {
   title: "Bravo AI — Workforce Intelligence Platform",
@@ -18,7 +19,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: noFlashTheme }} />
       </head>
       <body className="bg-bg text-fg antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Chatbot />
+        </ThemeProvider>
       </body>
     </html>
   );
