@@ -70,9 +70,7 @@ export default function LandingPage() {
       {/* Nav */}
       <header className="relative z-10 mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
         <div className="flex items-center gap-2">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-grad-brand shadow-glow">
-            <Sparkles size={18} className="text-white" />
-          </div>
+          <img src="/logo.png" alt="Bravo Opsis" className="h-9 w-9 rounded-xl object-cover" />
           <div>
             <p className="text-sm font-semibold leading-tight">Bravo Opsis</p>
             <p className="text-[10px] uppercase tracking-wider text-fg/50">
