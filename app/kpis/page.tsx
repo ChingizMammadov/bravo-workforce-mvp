@@ -135,7 +135,7 @@ export default function KpisPage() {
                       </div>
                       <div className="mt-3 flex items-center gap-3">
                         <Progress
-                          value={(k.current / k.target) * 100}
+                          value={k.current}
                           tone={
                             k.status === "on-track"
                               ? "success"
