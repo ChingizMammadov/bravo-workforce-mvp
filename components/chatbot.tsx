@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { MessageSquare, X, Send, Bot, User } from "lucide-react";
+import { MessageSquare, X, Send, Bot, User, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Message = {
@@ -28,7 +28,7 @@ export function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: "Hello! I'm your Bravo AI assistant. How can I help you optimize your operations today?",
+      text: "Hello! I'm Azin Ops, your Bravo operational intelligence assistant. How can I help you optimize your store today?",
       sender: "bot",
       timestamp: new Date()
     }
@@ -77,24 +77,32 @@ export function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 20, scale: 0.95, transformOrigin: "bottom right" }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             className="mb-4 w-80 sm:w-96 bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[500px]"
           >
             {/* Header */}
-            <div className="p-4 bg-primary text-primary-foreground flex justify-between items-center shadow-md">
-              <div className="flex items-center gap-2">
-                <Bot size={20} />
-                <span className="font-semibold text-sm">Bravo AI Assistant</span>
+            <div className="p-4 bg-primary text-primary-foreground flex justify-between items-center shadow-md relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-1 opacity-10">
+                <Sparkles size={80} />
+              </div>
+              <div className="flex items-center gap-2 relative z-10">
+                <div className="bg-primary-foreground/20 p-1.5 rounded-lg">
+                  <Bot size={20} />
+                </div>
+                <div>
+                  <h3 className="font-bold text-sm leading-tight">Azin Ops</h3>
+                  <p className="text-[10px] opacity-80 uppercase tracking-wider font-medium">Operational Intelligence</p>
+                </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="hover:bg-primary-foreground/10 p-1 rounded-full transition-colors"
+                className="hover:bg-primary-foreground/10 p-1.5 rounded-full transition-colors relative z-10"
               >
                 <X size={18} />
               </button>
@@ -103,7 +111,7 @@ export function Chatbot() {
             {/* Messages */}
             <div
               ref={scrollRef}
-              className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-50 dark:bg-zinc-950"
+              className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-50 dark:bg-zinc-950/50"
             >
               {messages.map((msg) => (
                 <div
@@ -124,9 +132,9 @@ export function Chatbot() {
               {isTyping && (
                 <div className="flex justify-start">
                   <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-3 rounded-2xl rounded-tl-none text-xs flex gap-1 shadow-sm">
-                    <span className="animate-bounce">.</span>
-                    <span className="animate-bounce delay-75">.</span>
-                    <span className="animate-bounce delay-150">.</span>
+                    <span className="animate-pulse w-1.5 h-1.5 bg-zinc-400 rounded-full"></span>
+                    <span className="animate-pulse delay-75 w-1.5 h-1.5 bg-zinc-400 rounded-full"></span>
+                    <span className="animate-pulse delay-150 w-1.5 h-1.5 bg-zinc-400 rounded-full"></span>
                   </div>
                 </div>
               )}
@@ -137,13 +145,13 @@ export function Chatbot() {
               <input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask a question..."
-                className="flex-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                placeholder="Ask Azin Ops a question..."
+                className="flex-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               />
               <button
                 type="submit"
                 disabled={!inputValue.trim() || isTyping}
-                className="bg-primary text-primary-foreground p-2 rounded-lg disabled:opacity-50 transition-opacity"
+                className="bg-primary text-primary-foreground p-2 rounded-xl disabled:opacity-50 transition-all hover:scale-105 active:scale-95 shadow-md shadow-primary/20"
               >
                 <Send size={18} />
               </button>
@@ -156,9 +164,10 @@ export function Chatbot() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-primary text-primary-foreground p-4 rounded-full shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center border-2 border-white/10"
+        className="bg-primary text-primary-foreground p-4 rounded-full shadow-lg hover:shadow-primary/30 transition-all flex items-center justify-center border-2 border-white/20 relative group"
       >
-        {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
+        <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20 group-hover:opacity-0 transition-opacity"></div>
+        <MessageSquare size={24} className="relative z-10" />
       </motion.button>
     </div>
   );
