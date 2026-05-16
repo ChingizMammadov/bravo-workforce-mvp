@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 // Applied before paint so the theme never flashes. Defaults to dark.
-const noFlashTheme = `(function(){try{var t=localStorage.getItem('bravo-theme');if(t!=='light')t='dark';document.documentElement.classList.toggle('dark',t==='dark');}catch(e){document.documentElement.classList.add('dark');}})();`;
+const noFlashTheme = `(function(){try{var t=localStorage.getItem('bravo-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

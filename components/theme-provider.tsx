@@ -16,10 +16,10 @@ const ThemeContext = createContext<{
   theme: Theme;
   toggle: () => void;
   setTheme: (t: Theme) => void;
-}>({ theme: "dark", toggle: () => {}, setTheme: () => {} });
+}>({ theme: "light", toggle: () => {}, setTheme: () => {} });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
+  const [theme, setThemeState] = useState<Theme>("light");
 
   // Sync state with whatever the no-flash <head> script already applied.
   useEffect(() => {
