@@ -13,19 +13,12 @@ type Message = {
 
 const RESPONSES = [
   {
-    keywords: ["productivity", "score", "improve"],
-    answer: "To boost your productivity score, focus on high-priority missions and try to minimize idle time between tasks. You can gain about 15% improvement by optimizing your route through the store.",
-    suggestion: "Try asking about 'productivity'."
+    keywords: ["risk", "spoilage", "department", "fish", "dairy", "highest"],
+    answer: "Fish and Dairy departments currently show the highest spoilage risk.\n\nFish Department:\n- Waste Risk: 11.2%\n- Main Issue: cold-chain compliance failures\n- Estimated quarterly loss: 4,200 AZN\n\nDairy Department:\n- FIFO compliance below target (75%)\n- Near-expiry clearance rate: 67%\n\nRecommended Actions:\n- Immediate cold-chain audits\n- AI-triggered markdown pricing\n- Mandatory morning FIFO checks"
   },
   {
-    keywords: ["bottleneck", "slow", "queue"],
-    answer: "The main bottleneck right now is the checkout queue (12 PM - 2 PM). Reallocating staff from the back-office to the registers will resolve this immediately.",
-    suggestion: "Try asking about 'bottlenecks'."
-  },
-  {
-    keywords: ["priority", "mission", "aisle"],
-    answer: "The 'FIFO Compliance Check' in Aisle 4 is your top priority. It has the highest impact on risk reduction and waste prevention for today's shift.",
-    suggestion: "Try asking about 'priority'."
+    keywords: ["reduce", "waste", "next quarter", "savings", "how"],
+    answer: "Projected waste reduction opportunities:\n\n1. Improve Dairy FIFO compliance from 75% to 88%\nPotential savings: 6,800 AZN/quarter\n\n2. Introduce AI markdown pricing for near-expiry products\nPotential recovery: 9,400 AZN/quarter\n\n3. Expand daily AI mission system to Fish departments\nProjected spoilage reduction: 14%\n\nEstimated total quarterly savings:\n18,000+ AZN"
   }
 ];
 
@@ -35,7 +28,7 @@ export function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: "Hello! I'm your Bravo AI. Type 'productivity', 'bottleneck', or 'priority' to see how I can help.",
+      text: "Hello! I'm your Bravo AI assistant. How can I help you optimize your operations today?",
       sender: "bot",
       timestamp: new Date()
     }
@@ -74,7 +67,7 @@ export function Chatbot() {
 
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
-        text: match ? match.answer : "I'm not sure about that. Try asking about 'productivity', 'bottlenecks', or 'priority'.",
+        text: match ? match.answer : "I'm sorry, I don't have enough data to answer that specific question. Try asking about 'spoilage risks' or 'waste reduction'.",
         sender: "bot",
         timestamp: new Date()
       };
@@ -118,7 +111,7 @@ export function Chatbot() {
                   className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[85%] p-3 rounded-2xl text-sm shadow-sm ${
+                    className={`max-w-[85%] p-3 rounded-2xl text-sm shadow-sm whitespace-pre-wrap ${
                       msg.sender === "user"
                         ? "bg-primary text-primary-foreground rounded-tr-none"
                         : "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-tl-none"
@@ -144,7 +137,7 @@ export function Chatbot() {
               <input
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Type 'productivity', 'bottleneck'..."
+                placeholder="Ask a question..."
                 className="flex-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
               />
               <button
