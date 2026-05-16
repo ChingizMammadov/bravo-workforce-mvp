@@ -145,9 +145,7 @@ export default function KpisPage() {
                           }
                         />
                         <span className="shrink-0 text-xs text-fg/55">
-                          {k.current}
-                          {k.unit} / {k.target}
-                          {k.unit}
+                          {k.current}{k.unit} / 100{k.unit}
                         </span>
                       </div>
                     </div>
