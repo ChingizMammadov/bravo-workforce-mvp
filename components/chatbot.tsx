@@ -11,24 +11,31 @@ type Message = {
   timestamp: Date;
 };
 
-const PRE_CALCULATED_ANSWERS = {
-  productivity: "Focus on completing high-priority missions first. Based on your current stats, reducing idle time between tasks could boost your score by up to 15%.",
-  bottlenecks: "Currently, the main bottleneck is the checkout queue during peak hours (12 PM - 2 PM). Consider reallocating staff from back-office tasks during this window.",
-  priority: "The 'FIFO Compliance Check' mission in Aisle 4 has the highest impact on risk reduction today. Completing it will prevent potential stock waste."
-};
-
-const QUESTIONS = [
-  { id: "productivity", text: "How can I improve my productivity score today?" },
-  { id: "bottlenecks", text: "What are the most common bottlenecks in my team?" },
-  { id: "priority", text: "Which mission should I prioritize for maximum impact?" }
+const RESPONSES = [
+  {
+    keywords: ["productivity", "score", "improve"],
+    answer: "To boost your productivity score, focus on high-priority missions and try to minimize idle time between tasks. You can gain about 15% improvement by optimizing your route through the store.",
+    suggestion: "Try asking about 'productivity'."
+  },
+  {
+    keywords: ["bottleneck", "slow", "queue"],
+    answer: "The main bottleneck right now is the checkout queue (12 PM - 2 PM). Reallocating staff from the back-office to the registers will resolve this immediately.",
+    suggestion: "Try asking about 'bottlenecks'."
+  },
+  {
+    keywords: ["priority", "mission", "aisle"],
+    answer: "The 'FIFO Compliance Check' in Aisle 4 is your top priority. It has the highest impact on risk reduction and waste prevention for today's shift.",
+    suggestion: "Try asking about 'priority'."
+  }
 ];
 
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "welcome",
-      text: "Hello! I'm your Bravo AI assistant. How can I help you today?",
+      text: "Hello! I'm your Bravo AI. Type 'productivity', 'bottleneck', or 'priority' to see how I can help.",
       sender: "bot",
       timestamp: new Date()
     }
@@ -42,28 +49,38 @@ export function Chatbot() {
     }
   }, [messages, isTyping]);
 
-  const handleQuestionClick = (questionId: string, questionText: string) => {
+  const handleSendMessage = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!inputValue.trim() || isTyping) return;
+
+    const userText = inputValue.trim();
     const userMsg: Message = {
       id: Date.now().toString(),
-      text: questionText,
+      text: userText,
       sender: "user",
       timestamp: new Date()
     };
 
     setMessages((prev) => [...prev, userMsg]);
+    setInputValue("");
     setIsTyping(true);
 
-    // Simulate bot response
+    // Matching logic
     setTimeout(() => {
+      const lowerText = userText.toLowerCase();
+      const match = RESPONSES.find(r => 
+        r.keywords.some(keyword => lowerText.includes(keyword))
+      );
+
       const botMsg: Message = {
         id: (Date.now() + 1).toString(),
-        text: PRE_CALCULATED_ANSWERS[questionId as keyof typeof PRE_CALCULATED_ANSWERS],
+        text: match ? match.answer : "I'm not sure about that. Try asking about 'productivity', 'bottlenecks', or 'priority'.",
         sender: "bot",
         timestamp: new Date()
       };
       setMessages((prev) => [...prev, botMsg]);
       setIsTyping(false);
-    }, 1500);
+    }, 1000);
   };
 
   return (
@@ -74,10 +91,10 @@ export function Chatbot() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="mb-4 w-80 sm:w-96 bg-card border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[500px]"
+            className="mb-4 w-80 sm:w-96 bg-white dark:bg-zinc-900 border border-border rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[500px]"
           >
             {/* Header */}
-            <div className="p-4 bg-primary text-primary-foreground flex justify-between items-center">
+            <div className="p-4 bg-primary text-primary-foreground flex justify-between items-center shadow-md">
               <div className="flex items-center gap-2">
                 <Bot size={20} />
                 <span className="font-semibold text-sm">Bravo AI Assistant</span>
@@ -93,7 +110,7 @@ export function Chatbot() {
             {/* Messages */}
             <div
               ref={scrollRef}
-              className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-muted"
+              className="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-50 dark:bg-zinc-950"
             >
               {messages.map((msg) => (
                 <div
@@ -101,10 +118,10 @@ export function Chatbot() {
                   className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[85%] p-3 rounded-2xl text-sm ${
+                    className={`max-w-[85%] p-3 rounded-2xl text-sm shadow-sm ${
                       msg.sender === "user"
                         ? "bg-primary text-primary-foreground rounded-tr-none"
-                        : "bg-muted text-muted-foreground rounded-tl-none"
+                        : "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700 rounded-tl-none"
                     }`}
                   >
                     {msg.text}
@@ -113,7 +130,7 @@ export function Chatbot() {
               ))}
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-muted text-muted-foreground p-3 rounded-2xl rounded-tl-none text-xs flex gap-1">
+                  <div className="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-3 rounded-2xl rounded-tl-none text-xs flex gap-1 shadow-sm">
                     <span className="animate-bounce">.</span>
                     <span className="animate-bounce delay-75">.</span>
                     <span className="animate-bounce delay-150">.</span>
@@ -122,35 +139,22 @@ export function Chatbot() {
               )}
             </div>
 
-            {/* Quick Actions */}
-            {!isTyping && (
-              <div className="p-4 pt-0 flex flex-wrap gap-2">
-                {QUESTIONS.map((q) => (
-                  <button
-                    key={q.id}
-                    onClick={() => handleQuestionClick(q.id, q.text)}
-                    className="text-[11px] bg-accent text-accent-foreground px-3 py-1.5 rounded-full hover:bg-accent/80 transition-colors text-left border border-border/50"
-                  >
-                    {q.text}
-                  </button>
-                ))}
-              </div>
-            )}
-
             {/* Footer */}
-            <div className="p-4 border-t border-border flex gap-2">
+            <form onSubmit={handleSendMessage} className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex gap-2">
               <input
-                disabled
-                placeholder="Ask a question..."
-                className="flex-1 bg-muted/50 border border-border rounded-lg px-3 py-2 text-xs opacity-50 cursor-not-allowed"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Type 'productivity', 'bottleneck'..."
+                className="flex-1 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
               />
               <button
-                disabled
-                className="bg-primary/50 text-primary-foreground p-2 rounded-lg opacity-50 cursor-not-allowed"
+                type="submit"
+                disabled={!inputValue.trim() || isTyping}
+                className="bg-primary text-primary-foreground p-2 rounded-lg disabled:opacity-50 transition-opacity"
               >
-                <Send size={16} />
+                <Send size={18} />
               </button>
-            </div>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>
@@ -159,7 +163,7 @@ export function Chatbot() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-primary text-primary-foreground p-4 rounded-full shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center"
+        className="bg-primary text-primary-foreground p-4 rounded-full shadow-lg hover:shadow-primary/20 transition-all flex items-center justify-center border-2 border-white/10"
       >
         {isOpen ? <X size={24} /> : <MessageSquare size={24} />}
       </motion.button>
